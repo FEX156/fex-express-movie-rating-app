@@ -1,19 +1,20 @@
 import axios from "axios";
 
 export class TmdbServices {
-  async get(endpoint, page = 1, time_window = null) {
+  async get(endpoint, page = 1) {
     try {
       const response = await axios.get(endpoint, {
         params: {
           api_key: process.env.TMDB_API_KEY,
           language: "en-US",
           page: page,
-          time_window: time_window,
         },
       });
-      return response.data.results;
+      const results = response.data.results;
+      return results;
     } catch (error) {
-      console.log(error);
+      console.log(error.toJSON());
+      throw error;
     }
   }
   async getTrending(endpoint, time_window) {
@@ -26,11 +27,8 @@ export class TmdbServices {
       });
       return response.data.results;
     } catch (error) {
-      if (error.response) {
-        const message = error.response.data.status_message;
-        throw new Error(message); // Ubah jadi throw
-      }
-      throw error; // fallback untuk error lain
+      console.log(error.toJSON());
+      throw error;
     }
   }
 }

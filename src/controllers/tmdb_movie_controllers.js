@@ -14,16 +14,15 @@ export class MovieController {
         const { poster_path, title, release_date, vote_average } = thumbnail;
         return { poster_path, title, release_date, vote_average };
       });
-      res
-        .status(201)
-        .json({
-          succes: true,
-          category: "popular",
-          page: req.params.page,
-          movie_list: thumbnails,
-        });
+      res.status(200).json({
+        succes: true,
+        category: "popular",
+        page: req.params.page,
+        movie_list: thumbnails,
+      });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 
@@ -37,16 +36,15 @@ export class MovieController {
         const { poster_path, title, release_date, vote_average } = thumbnail;
         return { poster_path, title, release_date, vote_average };
       });
-      res
-        .status(201)
-        .json({
-          succes: true,
-          category: "now playing",
-          page: req.params.page,
-          movie_list: thumbnails,
-        });
+      res.status(200).json({
+        succes: true,
+        category: "now playing",
+        page: req.params.page,
+        movie_list: thumbnails,
+      });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 
@@ -60,16 +58,15 @@ export class MovieController {
         const { poster_path, title, release_date, vote_average } = thumbnail;
         return { poster_path, title, release_date, vote_average };
       });
-      res
-        .status(201)
-        .json({
-          succes: true,
-          category: "upcoming",
-          page: req.params.page,
-          movie_list: thumbnails,
-        });
+      res.status(200).json({
+        succes: true,
+        category: "upcoming",
+        page: req.params.page,
+        movie_list: thumbnails,
+      });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 
@@ -83,16 +80,15 @@ export class MovieController {
         const { poster_path, title, release_date, vote_average } = thumbnail;
         return { poster_path, title, release_date, vote_average };
       });
-      res
-        .status(201)
-        .json({
-          succes: true,
-          category: "top rated",
-          page: req.params.page,
-          movie_list: thumbnails,
-        });
+      res.status(200).json({
+        succes: true,
+        category: "top rated",
+        page: req.params.page,
+        movie_list: thumbnails,
+      });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 }

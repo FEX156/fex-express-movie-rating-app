@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import router from "./routes/tmdb_routes.js";
+import thumbnails from "./routes/thumbnails_routes.js";
 
 const app = express();
 
@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-app.use("/tmdb/api", router);
+app.use("/tmdb/api/thumbnails", thumbnails);
 app.get("/", (req, res) => {
   res.status(201).json({ message: `hello from express` });
 });

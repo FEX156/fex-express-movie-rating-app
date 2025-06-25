@@ -15,7 +15,8 @@ export class TvControllers {
         .status(201)
         .json({ succes: true, page: req.params.page, tv_list: thumbnails });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
   getTumbnailOfAiringTodayTVs = async (req, res) => {
@@ -32,7 +33,8 @@ export class TvControllers {
         .status(201)
         .json({ succes: true, page: req.params.page, tv_list: thumbnails });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
   getTumbnailOfOnTVs = async (req, res) => {
@@ -46,7 +48,8 @@ export class TvControllers {
         .status(201)
         .json({ succes: true, page: req.params.page, tv_list: thumbnails });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
   getTumbnailOfTopRatedTVs = async (req, res) => {
@@ -63,7 +66,8 @@ export class TvControllers {
         .status(201)
         .json({ succes: true, page: req.params.page, tv_list: thumbnails });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 }

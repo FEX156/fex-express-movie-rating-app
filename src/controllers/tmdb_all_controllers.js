@@ -6,13 +6,36 @@ export class TmdbControllers {
   }
   getTrendingList = async (req, res) => {
     try {
-      const list = await this.tmdbservices.getTrending(
+      const data = await this.tmdbservices.getTrending(
         otherUrls.trending,
         req.params.time_window
       );
-      res.status(201).json({ succes: true, page: req.params.page, list: list });
+      const trending_list = await data.map((list) => {
+        const {
+          title,
+          release_date,
+          poster_path,
+          name,
+          first_air_date,
+          vote_average,
+        } = list;
+        return {
+          poster_path,
+          vote_average,
+          title,
+          name,
+          release_date,
+          first_air_date,
+        };
+      });
+      res.status(201).json({
+        succes: true,
+        time_window: req.params.time_window,
+        trending_list: trending_list,
+      });
     } catch (err) {
-      res.status(500).json({ success: false, message: { error: err.message } });
+      const { message, status } = err;
+      res.status(500).json({ succes: false, message: message });
     }
   };
 }

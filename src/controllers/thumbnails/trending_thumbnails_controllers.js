@@ -1,6 +1,6 @@
-import { otherUrls } from "../libs/tmdb_endpoints.js";
+import { otherUrls } from "../../libs/tmdb_endpoints.js";
 
-export class TmdbControllers {
+export class TrendingThumbnails {
   constructor(tmdbservices) {
     this.tmdbservices = tmdbservices;
   }
@@ -12,14 +12,18 @@ export class TmdbControllers {
       );
       const trending_list = await data.map((list) => {
         const {
+          id,
           title,
           release_date,
           poster_path,
           name,
           first_air_date,
           vote_average,
+          media_type,
         } = list;
         return {
+          media_type,
+          id,
           poster_path,
           vote_average,
           title,

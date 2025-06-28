@@ -1,41 +1,50 @@
 import express from "express";
-import { MovieController } from "../controllers/tmdb_movie_controllers.js";
 import { TmdbServices } from "../services/tmdb_services.js";
-import { TvControllers } from "../controllers/tmdb_tv_controllers.js";
-import { TmdbControllers } from "../controllers/tmdb_all_controllers.js";
+import { MovieThumbnailsController } from "../controllers/thumbnails/movie_thumbnail_controllers.js";
+import { TvThumbnailsControllers } from "../controllers/thumbnails/tv_tumbnails_controllers.js";
+import { TrendingThumbnails } from "../controllers/thumbnails/trending_thumbnails_controllers.js";
 
 const thumbnails = express.Router();
 
 const tmdbServices = new TmdbServices();
-const movieController = new MovieController(tmdbServices);
-const tvControllers = new TvControllers(tmdbServices);
-const allControllers = new TmdbControllers(tmdbServices);
+const movieThumbnailsControllers = new MovieThumbnailsController(tmdbServices);
+const tvThumbnailsControllers = new TvThumbnailsControllers(tmdbServices);
+const trendingThumbnailsControllers = new TrendingThumbnails(tmdbServices);
 
-thumbnails.get("/all/trending/:time_window", allControllers.getTrendingList);
+thumbnails.get(
+  "/all/trending/:time_window",
+  trendingThumbnailsControllers.getTrendingList
+);
 
 thumbnails.get(
   "/movies/popular/:page",
-  movieController.getTumbnailOfPopularMovies
+  movieThumbnailsControllers.getTumbnailOfPopularMovies
 );
 thumbnails.get(
   "/movies/now-playing/:page",
-  movieController.getTumbnailOfNowPlayingMovies
+  movieThumbnailsControllers.getTumbnailOfNowPlayingMovies
 );
 thumbnails.get(
   "/movies/upcoming/:page",
-  movieController.getTumbnailOfUpcomingMovies
+  movieThumbnailsControllers.getTumbnailOfUpcomingMovies
 );
 thumbnails.get(
   "/movies/top-rated/:page",
-  movieController.getTumbnailOfTopRatedMovies
+  movieThumbnailsControllers.getTumbnailOfTopRatedMovies
 );
 
-thumbnails.get("/tv/popular/:page", tvControllers.getTumbnailOfPopularTVs);
+thumbnails.get(
+  "/tv/popular/:page",
+  tvThumbnailsControllers.getTumbnailOfPopularTVs
+);
 thumbnails.get(
   "/tv/airing-today/:page",
-  tvControllers.getTumbnailOfAiringTodayTVs
+  tvThumbnailsControllers.getTumbnailOfAiringTodayTVs
 );
-thumbnails.get("/tv/on-tv/:page", tvControllers.getTumbnailOfOnTVs);
-thumbnails.get("/tv/top-rated/:page", tvControllers.getTumbnailOfTopRatedTVs);
+thumbnails.get("/tv/on-tv/:page", tvThumbnailsControllers.getTumbnailOfOnTVs);
+thumbnails.get(
+  "/tv/top-rated/:page",
+  tvThumbnailsControllers.getTumbnailOfTopRatedTVs
+);
 
 export default thumbnails;

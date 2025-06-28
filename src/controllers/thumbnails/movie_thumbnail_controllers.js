@@ -1,18 +1,26 @@
-import { movieUrls } from "../libs/tmdb_endpoints.js";
+import { movieUrls } from "../../libs/tmdb_endpoints.js";
 
-export class MovieController {
+export class MovieThumbnailsController {
   constructor(tmdbservices) {
     this.tmdbservices = tmdbservices;
   }
   getTumbnailOfPopularMovies = async (req, res) => {
     try {
-      const data = await this.tmdbservices.get(
+      const data = await this.tmdbservices.getThumbnails(
         movieUrls.popular,
         req.params.page
       );
       const thumbnails = await data.map((thumbnail) => {
-        const { poster_path, title, release_date, vote_average } = thumbnail;
-        return { poster_path, title, release_date, vote_average };
+        const { id, poster_path, title, release_date, vote_average } =
+          thumbnail;
+        return {
+          media_type: "movie",
+          id,
+          poster_path,
+          title,
+          release_date,
+          vote_average,
+        };
       });
       res.status(200).json({
         succes: true,
@@ -28,13 +36,21 @@ export class MovieController {
 
   getTumbnailOfNowPlayingMovies = async (req, res) => {
     try {
-      const data = await this.tmdbservices.get(
+      const data = await this.tmdbservices.getThumbnails(
         movieUrls.now_playing,
         req.params.page
       );
       const thumbnails = await data.map((thumbnail) => {
-        const { poster_path, title, release_date, vote_average } = thumbnail;
-        return { poster_path, title, release_date, vote_average };
+        const { id, poster_path, title, release_date, vote_average } =
+          thumbnail;
+        return {
+          media_type: "movie",
+          id,
+          poster_path,
+          title,
+          release_date,
+          vote_average,
+        };
       });
       res.status(200).json({
         succes: true,
@@ -50,13 +66,21 @@ export class MovieController {
 
   getTumbnailOfUpcomingMovies = async (req, res) => {
     try {
-      const data = await this.tmdbservices.get(
+      const data = await this.tmdbservices.getThumbnails(
         movieUrls.upcoming,
         req.params.page
       );
       const thumbnails = await data.map((thumbnail) => {
-        const { poster_path, title, release_date, vote_average } = thumbnail;
-        return { poster_path, title, release_date, vote_average };
+        const { id, poster_path, title, release_date, vote_average } =
+          thumbnail;
+        return {
+          media_type: "movie",
+          id,
+          poster_path,
+          title,
+          release_date,
+          vote_average,
+        };
       });
       res.status(200).json({
         succes: true,
@@ -72,13 +96,21 @@ export class MovieController {
 
   getTumbnailOfTopRatedMovies = async (req, res) => {
     try {
-      const data = await this.tmdbservices.get(
+      const data = await this.tmdbservices.getThumbnails(
         movieUrls.top_rated,
         req.params.page
       );
       const thumbnails = await data.map((thumbnail) => {
-        const { poster_path, title, release_date, vote_average } = thumbnail;
-        return { poster_path, title, release_date, vote_average };
+        const { id, poster_path, title, release_date, vote_average } =
+          thumbnail;
+        return {
+          media_type: "movie",
+          id,
+          poster_path,
+          title,
+          release_date,
+          vote_average,
+        };
       });
       res.status(200).json({
         succes: true,
